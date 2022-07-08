@@ -61,7 +61,12 @@ const updateProfile = async (req, res) => {
 const getProfileById = async (req, res) => {
   try {
     const userId = req.params.id;
-    const user = await users.findById(userId).populate("postsCreated");
+    const user = await users.findById(userId).populate({
+      path: "postsCreated",
+      populate: {
+        path: "createdBy",
+      },
+    });
     res.status(200).json(user);
   } catch (error) {
     console.log(error);

@@ -6,11 +6,9 @@ const createPost = async (req, res) => {
     let data = await req.body;
     const post = new posts({ ...data, createdBy: userId });
     const user = await users.findById(userId);
-    const postsCreated = user.postsCreated || [];
-    postsCreated.push(post._id);
-    user.postsCreated = postsCreated;
-    await user.save();
     await post.save();
+    user.postsCreated.push(post._id);
+    await user.save();
     res.status(200).json(post);
   } catch (error) {
     console.log(error);
