@@ -6,7 +6,7 @@ const authMiddleware = require("./middlewares/authMiddleware");
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/post");
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 const connectionURL =
   "mongodb+srv://discussionForum:discussionForum@cluster0.nllhb.mongodb.net/discussionForumDB?retryWrites=true&w=majority";
 app.use(cors());
